@@ -8,7 +8,6 @@ int main(int argc, char **argv)
   PetscReal approx, exact, relerr;
   PetscBool   invert = PETSC_FALSE;
 
-
   PetscCall(PetscInitialize(&argc, &argv, NULL,
     "Compute exp(x) with an N-term Taylor polynomial in parallel.\n"));
   PetscCallMPI(MPI_Comm_rank(PETSC_COMM_WORLD, &rank));
