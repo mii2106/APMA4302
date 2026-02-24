@@ -1,12 +1,19 @@
+# LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
 # macOS
 .DS_Store
 
 # binaries / debug symbols
-bvp
 *.dSYM/
 
 # outputs
-*.h5
 
 # object/build files
 *.o
