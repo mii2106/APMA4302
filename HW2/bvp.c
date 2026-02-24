@@ -17,6 +17,7 @@ int main(int argc,char **args) {
     PetscReal gamma = 0.0, c=0.0, h = 1;
     PetscInt  k=5;
 
+    
     PetscCall(PetscInitialize(&argc,&args,NULL,help));
 
     PetscOptionsBegin(PETSC_COMM_WORLD,"bvp_","options for bvp",NULL);
