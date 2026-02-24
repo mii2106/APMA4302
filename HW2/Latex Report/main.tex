@@ -1,0 +1,271 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[english]{babel}
+\usepackage{subcaption}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage[shortlabels]{enumitem}
+
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{longtable}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{booktabs}
+
+%tikzpicture
+\usepackage{tikz}
+\usepackage{scalerel}
+\usepackage{pict2e}
+\usepackage{tkz-euclide}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns,arrows.meta}
+\usetikzlibrary{shadows}
+\usetikzlibrary{external}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{lightgray}{rgb}{0.95,0.95,0.95}  % gris muy claro
+% más oscuro:
+% \definecolor{lightgray}{rgb}{0.9,0.9,0.9}
+% aún más plomo:
+% \definecolor{lightgray}{rgb}{0.85,0.85,0.85}
+
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{lightgray},
+  frame=single,
+  rulecolor=\color{black},
+  keywordstyle=\color{blue},
+  stringstyle=\color{red},
+  commentstyle=\color{green!50!black},
+  showstringspaces=false,
+  breaklines=true
+}
+%pgfplots
+\usepackage{pgfplots}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{statistics}
+\usepgfplotslibrary{fillbetween}
+
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Homework 2}					% Titulo
+\author{Matías I. Inostroza (mii2106)}					% Autor
+\date{\today}						% Fecha
+
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date
+\makeatother
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\theauthor}
+\lhead{\thetitle}
+\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.0 cm}
+    \includegraphics[scale = 0.35]{Columbia_logo.png}\\[2.0 cm]	% Logo Universidad
+    \textsc{\LARGE Columbia University}\\[2.0 cm]	% Nombre Universidad
+	\textsc{\Large APMAE4302}\\[0.5 cm]				% Codigo Curso
+	\textsc{\large Methods in computational science}\\[0.5 cm]		% Nombre Curso
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[1.5 cm]
+	
+	\begin{minipage}{0.4\textwidth}
+		\begin{center} \large
+			\emph{Author:}\\
+			\theauthor\linebreak
+			\end{center}
+	\end{minipage}\\[2 cm]
+	
+	{February 23, 2026}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Problem 1}
+
+First, lets assume that there exist two problems described by:
+
+\begin{equation}
+    \mathbf{A}\mathbf{u} = \mathbf{b} \qquad \text{and} \qquad \mathbf{A}\hat{\mathbf{u}} = \hat{\mathbf{b}}
+\end{equation}
+
+By substrating both:
+
+\begin{eqnarray}
+ \mathbf{A}\mathbf{u} -   \mathbf{A}\hat{\mathbf{u}} =  \mathbf{b}-\hat{\mathbf{b}}\\
+  \mathbf{A}(\mathbf{u}-\hat{\mathbf{u}}) = \mathbf{b}-\hat{\mathbf{b}} \\
+  \rightarrow  (\mathbf{u}-\hat{\mathbf{u}}) = \mathbf{A}^{-1}(\mathbf{b}-\hat{\mathbf{b}})
+\end{eqnarray}
+
+Considering $||\mathbf{A}\mathbf{x}||\le||\mathbf{A}||||\mathbf{x}||$
+
+\begin{eqnarray}
+    ||\mathbf{A}(\mathbf{u}-\hat{\mathbf{u}})|| \le \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert = \lVert\mathbf{A}\lVert\lVert\mathbf{A}^{-1}(\mathbf{b}-\hat{\mathbf{b}})\lVert \le \lVert\mathbf{A}\lVert\lVert\mathbf{A}^{-1}\lVert\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert 
+\end{eqnarray}
+
+Thus:
+
+\begin{equation}
+   \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \le  \lVert\mathbf{A}\lVert\lVert\mathbf{A}^{-1}\lVert\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert  = \kappa (\mathbf{A})\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert 
+\end{equation}
+
+Also, it can be stablished that $\lVert \mathbf{A}\mathbf{u}\lVert = \lVert\mathbf{b}\lVert \le \lVert \mathbf{A}\lVert\lVert\mathbf{u}\lVert$, and therefore $\frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert} \le \lVert \mathbf{A}\lVert$
+
+By multiplying both by $\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert$
+
+\begin{equation}
+ \frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert}   \lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \le   \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert
+\end{equation}
+
+Therefore , by using equation 6 and equation 7:
+
+\begin{eqnarray}
+   \frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert}   \lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \le   \kappa (\mathbf{A})\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert   \\
+   \rightarrow    \frac{\lVert\mathbf{u}-\hat{\mathbf{u}}\lVert}{\lVert\mathbf{u}\lVert}    \le   \kappa (\mathbf{A})\frac{\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert }{\lVert \mathbf{b} \lVert}
+\end{eqnarray}
+
+\textbf{2)} 
+
+From equation 3:
+\begin{equation}
+    ||\mathbf{A}(\mathbf{u}-\hat{\mathbf{u}})|| \le \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \rightarrow ||\mathbf{r}|| \le \lVert\mathbf{A}\lVert\lVert \mathbf{e} \lVert
+\end{equation}
+
+And also as $\mathbf{u} = \mathbf{A}^{-1}\mathbf{b}$, then:
+
+\begin{equation}
+    \lVert\mathbf{u}\lVert = \lVert \mathbf{A}^{-1}\mathbf{b}\lVert \le \lVert \mathbf{A}^{-1}\lVert \lVert \mathbf{b}\lVert 
+\end{equation}
+
+By multiplying 10 by 11:
+
+\begin{eqnarray}
+        ||\mathbf{r}||\lVert\mathbf{u}\lVert \le \lVert \mathbf{A}^{-1}\lVert \lVert\mathbf{A}\lVert \lVert \mathbf{b}\lVert\lVert \mathbf{e} \lVert\\
+        ||\mathbf{r}||\lVert\mathbf{u}\lVert \le \kappa(\mathbf{A}) \lVert \mathbf{b}\lVert\lVert \mathbf{e} \lVert\\
+        \frac{1}{\kappa(\mathbf{A})}\frac{\lVert \mathbf{r}\lVert}{\lVert \mathbf{b}\lVert} \le \frac{\lVert \mathbf{e}\lVert}{\lVert \mathbf{u}\lVert}
+\end{eqnarray}
+
+And as $\lVert \mathbf{e} \lVert = \lVert \mathbf{u}-\hat{\mathbf{u}} \lVert $ that means:
+
+\begin{equation}
+         \frac{1}{\kappa(\mathbf{A})}\frac{\lVert \mathbf{r}\lVert}{\lVert \mathbf{b}\lVert} \le \frac{\lVert \mathbf{e}\lVert}{\lVert \mathbf{u}\lVert} \le \kappa (\mathbf{A})\frac{\lVert \mathbf{r}\lVert }{\lVert \mathbf{b} \lVert}
+\end{equation}
+
+\section{Problem 2}
+If $\mathbf{v}_j =\sin(j\pi x_i) $ is an eigenvector of $\mathbf{A}$, it should happen that $\mathbf{A}\mathbf{v}_j = \lambda_i \mathbf{v}_j$ 
+
+\begin{eqnarray}
+(\mathbf{A}\mathbf{v}_j)_i &=& \frac{1}{h^2}(-v^{i-1} + 2v^i - v^{i+1}) \\
+ &=& \frac{1}{h^2}(-\sin(j\pi (i-1)h ) + 2\sin(j\pi (i)h) - \sin(j\pi (i+1)h)
+\end{eqnarray}
+
+Lets redefine as the arguments as sums of angles $\theta = j\pi i h $ and $\phi = j\pi h $
+
+\begin{eqnarray}
+(\mathbf{A}\mathbf{v}_j)_i 
+\notag  &=& \frac{1}{h^2}(-\sin(\theta -\phi) + 2\sin(\theta) - \sin(\theta +\phi))\\
+ \notag  &=&\frac{1}{h^2}(-\sin(\theta)\cos(\phi) + \sin(\phi)\cos(\theta) + 2\sin(\theta) -\sin(\theta)\cos(\phi) - \sin(\phi)\cos(\theta))\\
+ \notag  &=&\frac{1}{h^2}(-2\sin(\theta)\cos(\phi)+2\sin(\theta))\\
+  \notag  &=&\frac{1}{h^2}(2\sin(\theta)(1-\cos(\phi)))
+\end{eqnarray}
+
+And $1-\cos(\phi) = 2\sin^2(\frac{\phi}{2})$
+
+\begin{eqnarray}
+      (\mathbf{A}\mathbf{v}_j)_i 
+\notag  &=&  \frac{4}{h^2}(\sin^2(\frac{\phi}{2})) \sin(\theta) =  \frac{4}{h^2}(\sin^2(\frac{j\pi h}{2})) \sin(j\pi i h)  =  \frac{4}{h^2}(\sin^2(\frac{j\pi h}{2})) \sin(j\pi x_i)\\
+\notag &=& \frac{4}{h^2}(\sin^2(\frac{j\pi h}{2})) \mathbf{v_j}
+\end{eqnarray}
+
+That $(\mathbf{A}\mathbf{v}_j)_i$ is the eigenvector of $\mathbf{A}$
+
+\textbf{2)} The corresponding eigenvalue $\lambda$ is the value infront of the eigenvector.
+
+\begin{equation}
+    (\mathbf{A}\mathbf{v}_j)_i 
+\notag   = \frac{4}{h^2}(\sin^2(\frac{j\pi h}{2})) \mathbf{v_j} = \lambda_j\mathbf{v_j}
+\end{equation}
+
+Then:
+
+\begin{equation}
+    \lambda_j= \frac{4}{h^2}\sin^2(\frac{j\pi h}{2}) = 4m^2\sin^2(\frac{j\pi}{2m})
+\end{equation}
+
+For $j = 1, ... , m-1 $ (not including boundary conditions, where $\lambda$ should be zero)
+
+\textbf{3)} If $m\rightarrow \infty$:
+\begin{itemize}
+    \item For j=1 is the lowest eigenvalue: $\frac{\pi}{2m}$ is small, then $\sin(\frac{\pi}{2m}) \approx \frac{\pi}{2m}$. Then
+
+    \begin{equation}
+        \lambda_{min} \approx 4m^2(\frac{\pi}{2m})^2 = \pi
+    \end{equation}
+
+    \item For j=m-1 is the lowest eigenvalue: $\frac{(m-1)\pi}{2m} = \frac{\pi}{2} - \frac{\pi}{2m}\approx \frac{\pi}{2}$ , then $\sin(\frac{\pi}{2}) = 1$. Then:
+
+        \begin{equation}
+        \lambda_{max} \approx 4m^2(1)^2 = 4m^2
+    \end{equation}
+\end{itemize}
+
+Finally:
+
+\begin{equation}
+    \kappa(\mathbf{A}) \approx \frac{4m}{\pi} = O(m^2)
+\end{equation}
+
+\textbf{3)} 
+\begin{eqnarray}
+    u(x) = \sin(k\pi x) + c(x-\frac{1}{2})^3\\
+    u'(x) = k\pi\cos(k\pi x ) + 3c(x-\frac{1}{2})^2\\
+    u''(x) = -k^2\pi^2\sin(k\pi x) + 6c(x-\frac{1}{2})
+\end{eqnarray}
+
+Then, by susbtituting in $-u'' + \gamma u = f(x)$
+
+\begin{eqnarray}
+k^2\pi^2\sin(k\pi x) - 6c(x-\frac{1}{2}) + \gamma(\sin(k\pi x) + c(x-\frac{1}{2})^3) = f(x)\\
+( k^2\pi^2+\gamma)\sin(k\pi x) + \gamma c(x-\frac{1}{2})^3 - 6c(x-\frac{1}{2}) = f(x)
+\end{eqnarray}
+
+
+
+
+\end{document}
