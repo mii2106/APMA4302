@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# binaries / debug symbols
+bvp
+*.dSYM/
+
+# outputs
+*.h5
+
+# object/build files
+*.o
+*.out
