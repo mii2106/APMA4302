@@ -119,13 +119,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem 1}
 
-First, lets assume that there exist two problems described by:
+\textbf{1)} First, let’s assume that there are two problems described by:
 
 \begin{equation}
     \mathbf{A}\mathbf{u} = \mathbf{b} \qquad \text{and} \qquad \mathbf{A}\hat{\mathbf{u}} = \hat{\mathbf{b}}
 \end{equation}
 
-By substrating both:
+By subtracting both:
 
 \begin{eqnarray}
  \mathbf{A}\mathbf{u} -   \mathbf{A}\hat{\mathbf{u}} =  \mathbf{b}-\hat{\mathbf{b}}\\
@@ -145,15 +145,15 @@ Thus:
    \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \le  \lVert\mathbf{A}\lVert\lVert\mathbf{A}^{-1}\lVert\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert  = \kappa (\mathbf{A})\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert 
 \end{equation}
 
-Also, it can be stablished that $\lVert \mathbf{A}\mathbf{u}\lVert = \lVert\mathbf{b}\lVert \le \lVert \mathbf{A}\lVert\lVert\mathbf{u}\lVert$, and therefore $\frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert} \le \lVert \mathbf{A}\lVert$
+Also, it can be established that$\lVert \mathbf{A}\mathbf{u}\lVert = \lVert\mathbf{b}\lVert \le \lVert \mathbf{A}\lVert\lVert\mathbf{u}\lVert$, and therefore $\frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert} \le \lVert \mathbf{A}\lVert$
 
-By multiplying both by $\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert$
+By multiplying both sides by $\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert$
 
 \begin{equation}
  \frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert}   \lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \le   \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert
 \end{equation}
 
-Therefore , by using equation 6 and equation 7:
+Therefore, using Equations (6) and (7):
 
 \begin{eqnarray}
    \frac{\lVert\mathbf{b}\lVert}{\lVert\mathbf{u}\lVert}   \lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \le   \kappa (\mathbf{A})\lVert(\mathbf{b}-\hat{\mathbf{b}})\lVert   \\
@@ -167,13 +167,13 @@ From equation 3:
     ||\mathbf{A}(\mathbf{u}-\hat{\mathbf{u}})|| \le \lVert\mathbf{A}\lVert\lVert(\mathbf{u}-\hat{\mathbf{u}})\lVert \rightarrow ||\mathbf{r}|| \le \lVert\mathbf{A}\lVert\lVert \mathbf{e} \lVert
 \end{equation}
 
-And also as $\mathbf{u} = \mathbf{A}^{-1}\mathbf{b}$, then:
+Also, as $\mathbf{u} = \mathbf{A}^{-1}\mathbf{b}$, then:
 
 \begin{equation}
     \lVert\mathbf{u}\lVert = \lVert \mathbf{A}^{-1}\mathbf{b}\lVert \le \lVert \mathbf{A}^{-1}\lVert \lVert \mathbf{b}\lVert 
 \end{equation}
 
-By multiplying 10 by 11:
+Multiplying Equation (10) by Equation (11):
 
 \begin{eqnarray}
         ||\mathbf{r}||\lVert\mathbf{u}\lVert \le \lVert \mathbf{A}^{-1}\lVert \lVert\mathbf{A}\lVert \lVert \mathbf{b}\lVert\lVert \mathbf{e} \lVert\\
@@ -181,21 +181,22 @@ By multiplying 10 by 11:
         \frac{1}{\kappa(\mathbf{A})}\frac{\lVert \mathbf{r}\lVert}{\lVert \mathbf{b}\lVert} \le \frac{\lVert \mathbf{e}\lVert}{\lVert \mathbf{u}\lVert}
 \end{eqnarray}
 
-And as $\lVert \mathbf{e} \lVert = \lVert \mathbf{u}-\hat{\mathbf{u}} \lVert $ that means:
+Since $\lVert \mathbf{e} \lVert = \lVert \mathbf{u}-\hat{\mathbf{u}} \lVert $ it follows that:
 
 \begin{equation}
          \frac{1}{\kappa(\mathbf{A})}\frac{\lVert \mathbf{r}\lVert}{\lVert \mathbf{b}\lVert} \le \frac{\lVert \mathbf{e}\lVert}{\lVert \mathbf{u}\lVert} \le \kappa (\mathbf{A})\frac{\lVert \mathbf{r}\lVert }{\lVert \mathbf{b} \lVert}
 \end{equation}
 
 \section{Problem 2}
-If $\mathbf{v}_j =\sin(j\pi x_i) $ is an eigenvector of $\mathbf{A}$, it should happen that $\mathbf{A}\mathbf{v}_j = \lambda_i \mathbf{v}_j$ 
+If $\mathbf{v}_j = \sin(j\pi x_i)$ is an eigenvector of $\mathbf{A}$, then it satisfies
+$\mathbf{A}\mathbf{v}_j = \lambda_j \mathbf{v}_j$.
 
 \begin{eqnarray}
 (\mathbf{A}\mathbf{v}_j)_i &=& \frac{1}{h^2}(-v^{i-1} + 2v^i - v^{i+1}) \\
  &=& \frac{1}{h^2}(-\sin(j\pi (i-1)h ) + 2\sin(j\pi (i)h) - \sin(j\pi (i+1)h)
 \end{eqnarray}
 
-Lets redefine as the arguments as sums of angles $\theta = j\pi i h $ and $\phi = j\pi h $
+Define the angles $\theta = j\pi i h$ and $\phi = j\pi h$.
 
 \begin{eqnarray}
 (\mathbf{A}\mathbf{v}_j)_i 
@@ -213,9 +214,9 @@ And $1-\cos(\phi) = 2\sin^2(\frac{\phi}{2})$
 \notag &=& \frac{4}{h^2}(\sin^2(\frac{j\pi h}{2})) \mathbf{v_j}
 \end{eqnarray}
 
-That $(\mathbf{A}\mathbf{v}_j)_i$ is the eigenvector of $\mathbf{A}$
+This shows that $\mathbf{v}_j$ corresponds to an eigenvector of $\mathbf{A}$.
 
-\textbf{2)} The corresponding eigenvalue $\lambda$ is the value infront of the eigenvector.
+\textbf{2)} The corresponding eigenvalue $\lambda$ is the scalar multiplying the eigenvector.
 
 \begin{equation}
     (\mathbf{A}\mathbf{v}_j)_i 
@@ -228,21 +229,26 @@ Then:
     \lambda_j= \frac{4}{h^2}\sin^2(\frac{j\pi h}{2}) = 4m^2\sin^2(\frac{j\pi}{2m})
 \end{equation}
 
-For $j = 1, ... , m-1 $ (not including boundary conditions, where $\lambda$ should be zero)
+For $j = 1, \ldots, m-1$ (excluding the boundary nodes, where $\lambda$ is not defined in the same way).
 
 \textbf{3)} If $m\rightarrow \infty$:
 \begin{itemize}
-    \item For j=1 is the lowest eigenvalue: $\frac{\pi}{2m}$ is small, then $\sin(\frac{\pi}{2m}) \approx \frac{\pi}{2m}$. Then
-
-    \begin{equation}
-        \lambda_{min} \approx 4m^2(\frac{\pi}{2m})^2 = \pi
-    \end{equation}
-
-    \item For j=m-1 is the lowest eigenvalue: $\frac{(m-1)\pi}{2m} = \frac{\pi}{2} - \frac{\pi}{2m}\approx \frac{\pi}{2}$ , then $\sin(\frac{\pi}{2}) = 1$. Then:
-
-        \begin{equation}
-        \lambda_{max} \approx 4m^2(1)^2 = 4m^2
-    \end{equation}
+	\item For $j = 1$, we obtain the smallest eigenvalue. Since 
+	$\frac{\pi}{2m}$ is small, we use $\sin\left(\frac{\pi}{2m}\right) \approx \frac{\pi}{2m}$. Then:
+	
+	\begin{equation}
+		\lambda_{\min} \approx 4m^2\left(\frac{\pi}{2m}\right)^2 = \pi^2
+	\end{equation}
+	
+	\item For $j = m-1$, we obtain the largest eigenvalue. Since 
+	\[
+	\frac{(m-1)\pi}{2m} = \frac{\pi}{2} - \frac{\pi}{2m} \approx \frac{\pi}{2},
+	\]
+	we have $\sin\left(\frac{\pi}{2}\right) = 1$. Then:
+	
+	\begin{equation}
+		\lambda_{\max} \approx 4m^2
+	\end{equation}
 \end{itemize}
 
 Finally:
@@ -251,7 +257,8 @@ Finally:
     \kappa(\mathbf{A}) \approx \frac{4m}{\pi} = O(m^2)
 \end{equation}
 
-\textbf{3)} 
+\section{Problem 3}
+\textbf{a)} 
 \begin{eqnarray}
     u(x) = \sin(k\pi x) + c(x-\frac{1}{2})^3\\
     u'(x) = k\pi\cos(k\pi x ) + 3c(x-\frac{1}{2})^2\\
@@ -265,9 +272,9 @@ k^2\pi^2\sin(k\pi x) - 6c(x-\frac{1}{2}) + \gamma(\sin(k\pi x) + c(x-\frac{1}{2}
 ( k^2\pi^2+\gamma)\sin(k\pi x) + \gamma c(x-\frac{1}{2})^3 - 6c(x-\frac{1}{2}) = f(x)
 \end{eqnarray}
 
-\section{Problem 3}
+\textbf{b)}
 
-For this problem, the code was created and its name is 'bvp.c'. Is added in the main file HW2. The file was made from tri.c code, and modfied by adding the term $gamma u$, thus the matrix $\mathbf{A}$ has the form:
+For this problem, the code was implemented in a file named bvp.c, located in the main HW2 directory. The file was developed based on the tri.c code and modified by adding the term $\gamma u$. As a result, the matrix $\mathbf{A}$ takes the following form:
 
 \begin{equation}
 	\mathbf{A}_i = \frac{1}{h^2}\begin{bmatrix}
@@ -275,9 +282,54 @@ For this problem, the code was created and its name is 'bvp.c'. Is added in the 
 	\end{bmatrix}
 \end{equation}
 
-And vector $b = f(x_i)$
+The right-hand side vector is given by $\mathbf{b} = f(x_i)$.
 
-By using 
+Using the provided plotting code and running the bvp.c program, the following plot is obtained:
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{Figures/F1.png}
+	\caption{Numerical vs exact solution}
+	\label{fig:solution}
+\end{figure}
+
+\textbf{c)} By setting $\gamma = 0$ and $c = 0$, and using 1 MPI process, the following convergence plot is obtained:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=12cm]{Figures/F2.png}
+	\caption{Convergence plot}
+	\label{fig:solution}
+\end{figure}
+
+It can be observed that the order of convergence is 2 for all values of $k$.
+
+
+\section{Problem 4}
+
+
+
+\begin{itemize}
+	\item[(a)] Jacobi preconditioned Richardson (\textbf{10000 iterations}):
+	Very slow convergence. The method essentially stagnates, since Richardson is highly sensitive to the condition number and Jacobi preconditioning is not sufficient to significantly improve convergence.
+	
+	\item[(b)] Unpreconditioned Conjugate Gradient (\textbf{102 iterations}):
+	Significant improvement over Richardson. However, it still requires many iterations due to the condition number of the system and the absence of preconditioning.
+	
+	\item[(c)] Unpreconditioned Conjugate Gradient with $c = 0$ (\textbf{1 iteration}):
+	Converges in a single iteration. This occurs because the right hand side aligns with an eigenvector of the matrix, allowing to recover the exact solution immediately.
+	
+	\item[(d)] ICC preconditioned Conjugate Gradient (\textbf{1 iteration}):
+	Excellent performance. The ICC preconditioner provides a very accurate approximation of the matrix factorization, resulting in a well conditioned system.
+	
+	\item[(e)] Block Jacobi preconditioned CG (4 processors, \textbf{7 iterations}):
+	Slower than ICC. The preconditioning is applied locally to each block rather than globally, which reduces its effectiveness due to loss of global coupling.
+	
+	\item[(f)] MUMPS direct solver (1 processor, \textbf{1 iteration}):
+	Direct solver, so the solution is obtained exactly in one step. No iterative process is required.
+	
+	\item[(g)] MUMPS direct solver (4 processors, \textbf{1 iteration}):
+	Same behavior as with one processor. Parallelization improves computational time, but not the number of iterations.
+\end{itemize}
 
 \end{document}

@@ -10,14 +10,14 @@ int main(int argc,char **args) {
     Mat         A;
     KSP         ksp;
     PetscInt    m = 4, i, Istart, Iend, j[3], bc[2];
-    PetscReal   v[3], errnorm, unorm, x ,u_i ,f_i ;
+    PetscReal   v[3], errnorm=0.0, unorm=0.0, x ,u_i ,f_i ;
     PetscViewer viewer;
 
     // agregado
     PetscReal gamma = 0.0, c=0.0, h = 1;
     PetscInt  k=5;
 
-    
+
     PetscCall(PetscInitialize(&argc,&args,NULL,help));
 
     PetscOptionsBegin(PETSC_COMM_WORLD,"bvp_","options for bvp",NULL);
