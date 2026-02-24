@@ -1,0 +1,8 @@
+# options file for default parameters
+-bvp_m 201
+-bvp_gamma 0.
+-bvp_k 5
+-bvp_c 3.
+-ksp_rtol 1.e-8
+-ksp_atol 1.e-10
+-ksp_monitor
