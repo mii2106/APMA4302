@@ -44,34 +44,31 @@ int main(int argc,char **args) {
     bc[0] = 0; 
     bc[1] = m-1;
     for (i=Istart; i<Iend; i++) {
-        if (i == 0) {
-            v[0] = 1;
-            j[0] = 0;
-            PetscCall(MatSetValues(A,1,&i,1,j,v,INSERT_VALUES));
-        } else if (i==m-1){
-            v[0] =1;
-            j[0] = m-1;
-            PetscCall(MatSetValues(A,1,&i,1,j,v,INSERT_VALUES));
-        } else {
-            v[0] = -1.0/(h*h);  v[1] = 2/(h*h) + gamma;  v[2] = -1.0/(h*h);
-            j[0] = i-1;   j[1] = i;    j[2] = i+1;
-                PetscCall(MatSetValues(A,1,&i,3,j,v,INSERT_VALUES));
-            }
-        
         x = i*h;
         u_i = PetscSinReal(k*PETSC_PI*x) + c*(x-0.5)*(x-0.5)*(x-0.5);
-        f_i = (k*k*PETSC_PI*PETSC_PI + gamma) * PetscSinReal(k*PETSC_PI*x)+
-                gamma*c*(x-0.5)*(x-0.5)*(x-0.5)-6*c*(x-0.5);
         PetscCall(VecSetValues(usol,1,&i,&u_i,INSERT_VALUES));
-        PetscCall(VecSetValues(f,1,&i,&f_i,INSERT_VALUES));
+        if (i == 0 || i == m-1) {
+            PetscScalar one = 1.0;
+            PetscCall(MatSetValues(A,1,&i,1,&i,&one,INSERT_VALUES));
+        } else {
+            v[0] = -1.0/(h*h); v[1] = 2.0/(h*h)+gamma; v[2] = -1.0/(h*h);
+            j[0] = i-1; j[1] = i; j[2] = i+1;
+            PetscCall(MatSetValues(A,1,&i,3,j,v,INSERT_VALUES));
+            f_i = (k*k*PETSC_PI*PETSC_PI + gamma)*PetscSinReal(k*PETSC_PI*x)
+                + gamma*c*(x-0.5)*(x-0.5)*(x-0.5) - 6*c*(x-0.5);
+            PetscCall(VecSetValues(f,1,&i,&f_i,INSERT_VALUES));
         }
+    }
     PetscCall(MatAssemblyBegin(A,MAT_FINAL_ASSEMBLY));
     PetscCall(MatAssemblyEnd(A,MAT_FINAL_ASSEMBLY));
     PetscCall(VecAssemblyBegin(usol));
     PetscCall(VecAssemblyEnd(usol));
     PetscCall(VecAssemblyBegin(f));
     PetscCall(VecAssemblyEnd(f));
-    PetscCall (MatZeroRowsColumns (A, 2, bc, 1.0, usol, f));
+
+    bc[0] =0;
+    bc[1] = m-1;
+    PetscCall(MatZeroRowsColumns(A, 2, bc, 1.0, usol, f));
     PetscCall(KSPCreate(PETSC_COMM_WORLD,&ksp));
     PetscCall(KSPSetOperators(ksp,A,A));
     PetscCall(KSPSetFromOptions(ksp));
