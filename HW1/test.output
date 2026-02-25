@@ -1,0 +1,13 @@
+mpicc -o HW1.o -c -fPIC -Wall -Wwrite-strings -Wno-unknown-pragmas -Wconversion -Wno-sign-conversion -Wno-float-conversion -Wno-implicit-float-conversion -fstack-protector -fno-stack-check -Qunused-arguments -fvisibility=hidden -O3 -march=native -pedantic -std=c99 -I/Users/mspieg/Repos/gitlab/petsc/include -I/Users/mspieg/Repos/gitlab/petsc/apma4302-pkgs-opt/include -I/opt/X11/include    HW1.c
+mpicc -Wl,-commons,use_dylibs -Wl,-search_paths_first -Wl,-no_compact_unwind -Wl,-no_warn_duplicate_libraries  -fPIC -Wall -Wwrite-strings -Wno-unknown-pragmas -Wconversion -Wno-sign-conversion -Wno-float-conversion -Wno-implicit-float-conversion -fstack-protector -fno-stack-check -Qunused-arguments -fvisibility=hidden -O3 -march=native -pedantic -std=c99 -o HW1 HW1.o  -Wl,-rpath,/Users/mspieg/Repos/gitlab/petsc/apma4302-pkgs-opt/lib -L/Users/mspieg/Repos/gitlab/petsc/apma4302-pkgs-opt/lib -Wl,-rpath,/opt/X11/lib -L/opt/X11/lib -Wl,-rpath,/opt/homebrew/Cellar/open-mpi/5.0.9/lib -L/opt/homebrew/Cellar/open-mpi/5.0.9/lib -Wl,-rpath,/opt/homebrew/Cellar/gcc/15.2.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -L/opt/homebrew/Cellar/gcc/15.2.0/lib/gcc/current/gcc/aarch64-apple-darwin24/15 -Wl,-rpath,/opt/homebrew/Cellar/gcc/15.2.0/lib/gcc/current/gcc -L/opt/homebrew/Cellar/gcc/15.2.0/lib/gcc/current/gcc -Wl,-rpath,/opt/homebrew/Cellar/gcc/15.2.0/lib/gcc/current -L/opt/homebrew/Cellar/gcc/15.2.0/lib/gcc/current -lpetsc -lHYPRE -ldmumps -lmumps_common -lpord -lpthread -lscalapack -llapack -lblas -lhdf5_hl -lhdf5 -lparmetis -lmetis -lX11 -lmpi_usempif08 -lmpi_usempi_ignore_tkr -lmpi_mpifh -lmpi -lgfortran -lemutls_w -lheapt_w -lgfortran -lquadmath -lc++
+/bin/rm -f HW1.o
+Compiling expx code...
+Compilation successful!
+Running basic functionality tests...
+Testing with x = -709.0, N = 2866
+Test failed: [Errno 2] No such file or directory: './expx'
+
+tests were based on a running a program called expx, but it couldn't build it from the makefile
+There is a renamed version that runs in the test directory
+
+
