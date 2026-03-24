@@ -119,74 +119,55 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem 1}
 
-\textbf{1)} First, the $f$ function is needed. For find it, the following exact solution is given $u_{exact}(x,y)$ 
+\textbf{1)} 
+
+For the equation:
+
 \begin{equation}
-    u_{exact}(x,y)= A \exp\left(-\frac{(x-x_0)^2+(y-y_0)^2}{\sigma^2}\right)
+-\nabla^2 u + \gamma u^p = f
 \end{equation}
 
-Setting $b =\left(-\frac{(x-x_0)^2+(y-y_0)^2}{\sigma^2}\right) \rightarrow u_{exact} = A\exp(b)$
+The exact solution is given by $u_{exact}(x,y)= A \exp\left(-\frac{(x-x_0)^2+(y-y_0)^2}{\sigma^2}\right)$. Accordingly, the source term is defined as $f = -\nabla^2 u_{exact} + \gamma u_{exact}^p$
 
-\begin{itemize}
-    \item $\frac{\partial u}{\partial x} = A\exp(b)\frac{\partial b}{\partial x}$
-    \item $\frac{\partial^2 u}{\partial x^2} = A\left[\exp(b)\left(\frac{\partial b}{\partial x}\right)^2 + \exp(b)\frac{\partial^2 b}{\partial x^2}\right] = A\exp(b)\left[\left(\frac{\partial b}{\partial x}\right)^2 + \frac{\partial^2 b}{\partial x^2}\right] $
-    \item $\frac{\partial u}{\partial y} = A\exp(b)\frac{\partial b}{\partial y}$
-    \item $\frac{\partial^2 u}{\partial y^2} = A\left[\exp(b)\left(\frac{\partial b}{\partial y}\right)^2 + \exp(b)\frac{\partial^2 b}{\partial y^2}\right] = A\exp(b)\left[\left(\frac{\partial b}{\partial y}\right)^2 +\frac{\partial^2 b}{\partial y^2}\right]$
-\end{itemize}
-
-Then, the equation is:
-
-\begin{eqnarray}
-    -\left(A\exp(b)\left[\left(\frac{\partial b}{\partial x}\right)^2 + \frac{\partial^2 b}{\partial x^2}\right] +  A\exp(b)\left[\left(\frac{\partial b}{\partial y}\right)^2 +\frac{\partial^2 b}{\partial y^2}\right] \right) + \gamma \left(A\exp(b)\right)^p = f\\
-    -A\exp(b)\left(\left(\frac{\partial b}{\partial x}\right)^2 + \left(\frac{\partial b}{\partial y}\right)^2 + \frac{\partial^2 b}{\partial x^2}  +\frac{\partial^2 b}{\partial y^2} \right) + \gamma \left(A\exp(b)\right)^p = f
-\end{eqnarray}
-
-And $\frac{\partial b}{\partial x} = -\frac{2(x-x_0)}{\sigma^2}$, $\frac{\partial^2 b}{\partial x^2} = -\frac{2}{\sigma^2}$, $\frac{\partial b}{\partial y} = -\frac{2(y-y_0)}{\sigma^2}$, $\frac{\partial^2 b}{\partial y^2} = -\frac{2}{\sigma^2}$
-
-\begin{eqnarray}
-    -A\exp(b)\left(\frac{4}{\sigma^4}((x-x_0)^2 + (y-y_0)^2) - \frac{4}{\sigma^2}\right) + \gamma \left(A\exp(b)\right)^p = f\\
-    -A\exp(b)\left(-\frac{2}{\sigma^2}b - \frac{4}{\sigma^2}\right) + \gamma \left(A\exp(b)\right)^p = f \\
-    \frac{2}{\sigma^2}A\exp(b)\left( b + 2\right) + \gamma \left(A\exp(b)\right)^p = f
-\end{eqnarray}
-
-The discretization  is the following:
+The discretization is as follows:
 
 \begin{eqnarray}
 \frac{\partial^2 u}{\partial x^2} \approx \frac{u^{i-1,j} - 2u^{i,j} + u^{i+1,j}}{\Delta x^2} \\
 \frac{\partial^2 u}{\partial y^2} \approx \frac{u^{i,j-1} - 2u^{i,j} + u^{i,j+1}}{\Delta y^2} 
 \end{eqnarray}
 
-So that, the equation is:
+Thus, the equation becomes:
 
 \begin{equation}
   - \frac{u^{i-1,j} - 2u^{i,j} + u^{i+1,j}}{\Delta x^2} - \frac{u^{i,j-1} - 2u^{i,j} + u^{i,j+1}}{\Delta y^2} + \gamma (u^{i,j})^p = f
 \end{equation}
 
-If the grid is equally spaced, that means $\Delta x = \Delta y = h$:
+Assuming a uniform grid with spacing $\Delta x = \Delta y = h$, the discretized equation is given by
 
 \begin{equation}
       \frac{ 4u^{i,j} -u^{i-1,j} - u^{i+1,j} - u^{i,j-1}- u^{i,j+1}}{h^2} + \gamma (u^{i,j})^p = f  
 \end{equation}
 
-So that the residual is:
+Accordingly, the residual at interior nodes is defined as:
 
 \begin{equation}
       F^{i,j}(u) =    \frac{ 4u^{i,j} -u^{i-1,j} - u^{i+1,j} - u^{i,j-1}- u^{i,j+1}}{h^2} + \gamma (u^{i,j})^p - f = 0  
 \end{equation}
 
-And for the boundary nodes:
+And for boundary nodes, the residual is given by:
 
 \begin{equation}
     F^{i,j}(u) = u^{i,j} - u_{exact}(x_i,y_i) = 0
 \end{equation}
 
-\textbf{2)} The Jacobian corresponds to the equation's derivatives with respect to the $u$ variables. For nodes that are inside the grid:
+\textbf{2)} The Jacobian corresponds to the derivatives of the residual with respect to the nodal values of $u$. For interior nodes, the partial derivatives are given by:
 
 \begin{eqnarray}
     \frac{\partial F^{i,j}}{\partial u^{i,j}} = \frac{4}{h^2} + \gamma p (u^{i,j})^{p-1}\\
     \frac{\partial F^{i,j}}{\partial u^{i+1,j}} = \frac{\partial F^{i,j}}{\partial u^{i-1,j}} = \frac{\partial F^{i,j}}{\partial u^{i,j+1}} = \frac{\partial F^{i,j}}{\partial u^{i,j-1}} = -\frac{1}{h^2}
 \end{eqnarray}
 
-And for the boundary:
+And for boundary nodes:
 
 \begin{equation}
     \frac{\partial F^{i,j}}{\partial u^{i,j}} = 1
@@ -194,7 +175,9 @@ And for the boundary:
 \begin{equation}
     J(u) = 1
 \end{equation}
-If all unknowns are stacked into a global vector $\mathbf{u}$, the Jacobian for the interior equations can be written as
+
+If all unknowns are assembled into a global vector $\mathbf{u}$, the Jacobian associated with the interior equations can be written as:
+
 \begin{equation}
 \mathbf{J}(\mathbf{u}) = \mathbf{A} + \gamma p \, \mathrm{diag}\!\left(\mathbf{u}^{[p-1]}\right),
 \end{equation}
@@ -206,10 +189,9 @@ Thus, the global Jacobian is obtained by using the interior stencil rows for int
 
 \textbf{3)} 
 
-\textbf{ a)} For this problem, the code \texttt{reaction2d.c} was wrote and attached and uploaded to the repositori
+\textbf{ a)} For this problem, the code \texttt{reaction2d.c} was developed and is attached in the repository.
 
-
-\textbf{ b)}The function $f$ is controlled to be $f = -\nabla^2u_{exact}$ when \texttt{-rct\_linear\_f} is set, and  $f = -\nabla^2u_{exact} + \gamma u^p$ as the following piece of code
+\textbf{ b)} The function $f$ is defined as $f = -\nabla^2 u_{\text{exact}}$ when the option \texttt{-rct\_linear\_f} is set, and as $f = -\nabla^2 u_{\text{exact}} + \gamma u_{\text{exact}}^p$ otherwise, as implemented in the following code:
 
 \begin{lstlisting}
 PetscReal fRHS(PetscReal x, PetscReal y, AppCtx *user) {
@@ -221,7 +203,7 @@ PetscReal fRHS(PetscReal x, PetscReal y, AppCtx *user) {
     return f;
 \end{lstlisting}
 
-\textbf{ c)} For the residual is created from the function:
+\textbf{ c)} The residual is assembled using the function:
 \begin{lstlisting}
 PetscErrorCode FormFunctionLocal(DMDALocalInfo *info,
                                  PetscReal **u,
@@ -233,7 +215,8 @@ PetscErrorCode FormFunctionLocal(DMDALocalInfo *info,
                                  }
 \end{lstlisting}
 
-And the jacobian by the function:
+And the Jacobian is assembled using the function:
+
 
 \begin{lstlisting}
 PetscErrorCode FormJacobianLocal(DMDALocalInfo *info,
@@ -247,7 +230,7 @@ PetscErrorCode FormJacobianLocal(DMDALocalInfo *info,
                                  }
 \end{lstlisting}
 
-\textbf{d)} The code can set the Jacobian option through the lines
+\textbf{d)} The Jacobian evaluation strategy can be selected through the following lines:
 
 \begin{lstlisting}
     PetscCall(DMDASNESSetJacobianLocal(da,
@@ -257,7 +240,7 @@ PetscErrorCode FormJacobianLocal(DMDALocalInfo *info,
 
 The call to \texttt{SNESSetFromOptions} allows PETSc to override the analytical Jacobian registered in \texttt{DMDASNESSetJacobianLocal} with finite-difference approximations using the options -snes\_fd, -snes\_fd\_color, -snes\_mf, and -snes\_mf\_operator at runtime, without modifying the code.
 
-\textbf{e)} Paraview option is set by the following lines:
+\textbf{e)} The ParaView output is generated using the following lines:
 
 \begin{lstlisting}
     PetscCall(PetscViewerVTKOpen(PETSC_COMM_WORLD, "reaction2d.vtr",
@@ -270,9 +253,9 @@ The call to \texttt{SNESSetFromOptions} allows PETSc to override the analytical 
     PetscCall(PetscViewerDestroy(&viewer));
 \end{lstlisting}
 
-The variable $u$ is the solution from finite difference method, and $uexact$ is the exact solution. There is no RHS output because in Newton Raphson there is no RHS but residual evaluations. Note that this was extracted from \texttt{poisson2d.c} code
+The variable $u$ corresponds to the numerical solution obtained using the finite difference method, while $u_{\text{exact}}$ denotes the exact solution. No RHS is explicitly output, since the Newton Raphson method relies on residual evaluations rather than a RHS. This implementation is adapted from the \texttt{poisson2d.c} example.
 
-\textbf{4)} For a  $65\times65$ grid with $\gamma$, the following result is obtained:
+\textbf{4)} For a $65\times65$ grid with $\gamma = 0$, the following result is obtained:
 
 \begin{lstlisting}
   0 SNES Function norm 7.337078385146e+02
@@ -282,7 +265,8 @@ The variable $u$ is the solution from finite difference method, and $uexact$ is 
 on 65 x 65 grid:  rel_error |u-uexact|_2/|uexact|_2 = 0.000524515
 \end{lstlisting}
 
-The method converges in one iteration of the Newton Raphson method with a $\|F(u)\|_2 = 6.38\times10^{-11}<10^{-10}$ and a relative error of $5.24\times10^{-4}$. The linear system at each Newton step was solved using direct LU factorization with \texttt{-ksp\_type preonly -pc\_type lu -pc\_factor\_mat\_solver\_type mumps}, converging in 1 KSP iteration (see \texttt{options\_file\_gamma0} in files at the HW3 folder)
+The method converges in a single Newton iteration, reaching a residual norm of $\|F(u)\|_2 = 6.38\times10^{-11} < 10^{-10}$ and a relative error of $5.24\times10^{-4}$. The linear system at each Newton step is solved using direct LU factorization with \texttt{-ksp\_type preonly -pc\_type lu -pc\_factor\_mat\_solver\_type mumps}, requiring only one KSP iteration (see \texttt{options\_file\_gamma0} in the HW3 folder).
+
 
 \begin{figure}[h]
 \centering
@@ -292,7 +276,10 @@ The method converges in one iteration of the Newton Raphson method with a $\|F(u
 \label{fig:rotProtocol}
 \end{figure}
 
-\textbf{5)} After runing the problem with FD jacobian, these are the results:
+Figure 1 shows the results from paraview.
+
+\textbf{5)} After running the problem using finite difference Jacobians, the results listed in Table 1 are obtained:
+
 
 \begin{table}[h!]
 \centering
@@ -309,5 +296,108 @@ FD Colored (-snes\_fd\_color) & $5.24\times10^{-4}$& 7&  &  $1.174\times10^{-1}$
 \label{tab:jacobian_full}
 \end{table}
 
-\textbf{6)}
+The analytical Jacobian significantly reduces the number of function evaluations compared to the standard finite difference approximation. The colored finite-difference approach achieves comparable performance to the analytical Jacobian, demonstrating efficiency.
+
+
+\textbf{6)} For $\gamma=100$ and $p=3$, the nonlinear solver converges in 8 Newton iterations. The linear system at each Newton step is solved in a single KSP iteration. The nonlinear residual norms are shown in Table 2.
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		Newton Iteration $k$ & $\|F(u^k)\|_2$ & KSP Iterations \\
+		\midrule
+		0 & $2.0978\times10^{3}$  & - \\
+		1 & $1.8554\times10^{3}$  & 1 \\
+		2 & $1.6274\times10^{3}$  & 1  \\
+		3 & $1.2545\times10^{3}$  & 1  \\
+		4 & $9.0808\times10^{2}$  & 1 \\
+		5 & $9.4154\times10^{1}$  & 1  \\
+		6 & $1.4429\times10^{0}$  & 1  \\
+		7 & $3.5704\times10^{-4}$ & 1 \\
+		8 & $3.9173\times10^{-11}$ & 1 \\
+		\bottomrule
+	\end{tabular}
+	\caption{Nonlinear convergence history for $\gamma=100$ and $p=3$.}
+	\label{tab:newton_history}
+\end{table}
+
+Figure 2 shows the behavior of the residual norm, exhibiting quadratic convergence.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=10cm]{Figures/f2.png}
+	\vspace{-3.5mm}
+	\caption{Convergence plot for $\gamma = 100$ and $p=3$}
+	\label{fig:rotProtocol}
+\end{figure}
+
+\newpage
+\textbf{7)} Figure 3 shows the results for a linear case. The problem was run with the option \texttt{-rct\_linear\_f} for $\gamma=100$ and $p=3$ on a $65\times65$ grid. In this case, the right-hand side is defined as $f = -\nabla^2 u_{\text{exact}}$, omitting the reaction term $\gamma u_{\text{exact}}^p$.
+
+
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=10cm]{Figures/f3.png}
+	\vspace{-3.5mm}
+	\caption{Results $\gamma = 100$ and $p=3$}
+	\label{fig:rotProtocol}
+\end{figure}
+
+The obtained relative error was $\frac{\|u - u_{\text{exact}}\|_2}{\|u_{\text{exact}}\|_2} = 0.408$ which is significantly larger than in the full manufactured solution case ($5.24\times10^{-4}$). The numerical solution reaches a maximum amplitude of approximately $0.59$, compared to $1.0$ for $u_{\text{exact}}$.
+
+This occurs because using \texttt{-rct\_linear\_f} corresponds to solving the problem$-\nabla^2 u + \gamma u^p = -\nabla^2 u_{\text{exact}}$ which is not consistent with the manufactured solution, since the nonlinear term $\gamma u^p$ on the left-hand side has no corresponding term in the right-hand side. As a result, the solver converges to a solution different from $u_{\text{exact}}$.
+
+Compared to the linear case $\gamma=0$, the nonlinearity acts as an absorption term that reduces the amplitude of the solution. As $\gamma$ increases, this effect becomes stronger, which explains the difference in amplitude between $0.59$ and $1.0$.
+
+\textbf{8)} To run the code multiple times and collect the required data, a script \texttt{plot8.py} was developed with the assistance of Claude AI.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=17cm]{Figures/f4.png}
+	\vspace{-3.5mm}
+	\caption{Plots for scaling and mesh refinement}
+	\label{fig:rotProtocol}
+\end{figure}
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{cccccc}
+		\toprule
+		$n_{\text{procs}}$ & Refine & Grid & Newton Iter. & Time (s) & Rel. Error \\
+		\midrule
+		1 & 2 & $33\times33$   & 8 & $1.032\times10^{-1}$ & $8.098\times10^{-4}$ \\
+		1 & 3 & $65\times65$   & 8 & $1.221\times10^{-1}$ & $2.025\times10^{-4}$ \\
+		1 & 4 & $129\times129$ & 8 & $6.240\times10^{-1}$ & $5.065\times10^{-5}$ \\
+		1 & 5 & $257\times257$ & 8 & $3.679$  & $1.267\times10^{-5}$ \\
+		1 & 6 & $513\times513$ & 8 & $2.516\times10^{1}$  & $3.167\times10^{-6}$ \\
+		\midrule
+		2 & 2 & $33\times33$   & 8 & $5.996\times10^{-2}$ & $8.098\times10^{-4}$ \\
+		2 & 3 & $65\times65$   & 8 & $9.959\times10^{-2}$ & $2.025\times10^{-4}$ \\
+		2 & 4 & $129\times129$ & 8 & $3.981\times10^{-1}$ & $5.065\times10^{-5}$ \\
+		2 & 5 & $257\times257$ & 8 & $1.450$  & $1.267\times10^{-5}$ \\
+		2 & 6 & $513\times513$ & 8 & $7.051$  & $3.167\times10^{-6}$ \\
+		\midrule
+		4 & 2 & $33\times33$   & 8 & $4.204\times10^{-2}$ & $8.098\times10^{-4}$ \\
+		4 & 3 & $65\times65$   & 8 & $7.178\times10^{-2}$ & $2.025\times10^{-4}$ \\
+		4 & 4 & $129\times129$ & 8 & $3.882\times10^{-1}$ & $5.065\times10^{-5}$ \\
+		4 & 5 & $257\times257$ & 8 & $1.093$  & $1.267\times10^{-5}$ \\
+		4 & 6 & $513\times513$ & 8 & $5.284$  & $3.167\times10^{-6}$ \\
+		\bottomrule
+	\end{tabular}
+	\caption{Strong scaling and mesh refinement results for the nonlinear solver.}
+	\label{tab:scaling_results}
+\end{table}
+
+
+Figure 4 and table 3 shows the performance and convergence behavior for $\gamma=100$ and $p=3$.
+
+First, from the left panel (wall time vs grid size), the computational cost increases significantly with mesh refinement, as expected due to the quadratic growth in the number of unknowns. The runtime scales approximately as $\mathcal{O}(N)$ with respect to the number of degrees of freedom. Additionally, increasing the number of processors reduces the wall time, demonstrating parallel scalability. However, the speedup is sublinear, especially for finer grids, likely due to communication overhead and load imbalance.
+
+From the middle panel (relative error vs grid size), the method exhibits a clear second-order convergence rate. The slope of approximately $-2.02$ confirms that the finite-difference discretization achieves the expected $O(h^2)$ accuracy. This validates the correctness of the implementation and the consistency of the numerical scheme.
+
+Finally, the right panel (Newton iterations vs grid size) shows that the number of Newton iterations remains constant (equal to 8) across all grid sizes. This could indicates that the nonlinear convergence is mesh independent and that Newton's method performs robustly for this problem. It also suggests that the initial guess and solver configuration are appropriate.
+
+Overall, the results demonstrate that the solver achieves optimal convergence rates, good parallel scalability, and stable nonlinear performance across different grid resolutions.
 \end{document}

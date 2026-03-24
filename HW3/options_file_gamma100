@@ -4,6 +4,7 @@
 -da_grid_x 65
 -da_grid_y 65
 -snes_monitor
+-ksp_monitor
 -snes_atol 1e-10 
 -ksp_type preonly
 -pc_type lu 
