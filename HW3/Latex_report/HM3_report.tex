@@ -167,21 +167,21 @@ And for boundary nodes, the residual is given by:
     \frac{\partial F^{i,j}}{\partial u^{i+1,j}} = \frac{\partial F^{i,j}}{\partial u^{i-1,j}} = \frac{\partial F^{i,j}}{\partial u^{i,j+1}} = \frac{\partial F^{i,j}}{\partial u^{i,j-1}} = -\frac{1}{h^2}
 \end{eqnarray}
 
+
 And for boundary nodes:
 
 \begin{equation}
     \frac{\partial F^{i,j}}{\partial u^{i,j}} = 1
 \end{equation}
-\begin{equation}
-    J(u) = 1
-\end{equation}
+
+All other components of the Jacobian are zero except for those in Equations 8, 9, and 10.
 
 If all unknowns are assembled into a global vector $\mathbf{u}$, the Jacobian associated with the interior equations can be written as:
 
 \begin{equation}
 \mathbf{J}(\mathbf{u}) = \mathbf{A} + \gamma p \, \mathrm{diag}\!\left(\mathbf{u}^{[p-1]}\right),
 \end{equation}
-where $\mathbf{A}$ is the five point finite difference matrix associated with the operator $-\nabla^2$ (each row as $\begin{bmatrix} ...& -1 & ...&-1&4&-1&...&-1&...
+where $\mathbf{A}$ is the five point finite difference matrix associated with the operator $-\nabla^2$ (each row as $1/h^2\begin{bmatrix} ...& -1 & ...&-1&4&-1&...&-1&...
     \end{bmatrix} $), and $\mathrm{diag}(\mathbf{u}^{[p-1]})$ is a diagonal matrix whose entries are $u_k^{p-1}$.
 
 For boundary nodes, the corresponding rows of the Jacobian are replaced by rows of the identity matrix, since the boundary residual is simply $u_k-g_k=0$.
