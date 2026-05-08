@@ -1,0 +1,14 @@
+# petsc-options for a fieldsplit preconditioner using  geometric multigrid solver on each laplacian block
+-ksp_monitor 
+-da_refine 8
+-ksp_type fgmres
+-ksp_rtol 1.e-6
+-ksp_atol 1.e-10
+-pc_type fieldsplit
+-fieldsplit_vorticity_pc_type mg
+-fieldsplit_streamfunction_pc_type mg
+-fieldsplit_vorticity_pc_mg_levels 8
+-fieldsplit_streamfunction_pc_mg_levels 8
+-fieldsplit_vorticity_pc_mg_galerkin
+-fieldsplit_streamfunction_pc_mg_galerkin
+
