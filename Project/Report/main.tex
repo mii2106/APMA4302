@@ -521,24 +521,24 @@ These results provide a qualitative verification of the computation of the macro
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=7cm]{Figures/Figure_2.png}
-		\caption{Isometric view}
+		\caption{Computation time}
 		\label{fig:time1}
 	\end{subfigure}\hfill
 	\begin{subfigure}[t]{0.48\textwidth}
 		\centering
 		\includegraphics[width=7cm]{Figures/Figure_1.png}
-		\caption{Front view}
+		\caption{Ratio between Python code and Fortran code}
 		\label{fig:time2}
 	\end{subfigure}
-	\caption{RVE mesh.}
-	\label{fig:rve_mesh}
+	\caption{Time results}
+	\label{fig:}
 \end{figure}
 
 Figure~\ref{fig:time1} compares the offline computation time between the original serial Fortran implementation and the proposed parallel DOLFINx implementation for different numbers of EBH partitions, using 8 MPI ranks.
 
 The results show that both implementations exhibit an increasing computational cost as the number of partitions grows. This behavior is expected since the number of influence problems scales as
 \begin{equation}
-N_{\mathrm{solves}} = 6 + 6N_{\mathrm{part}},
+N_{\mathrm{solves}} = 6 + 6N_{\mathrm{part}}
 \end{equation}
 
 meaning that each additional partition introduces six additional linear systems associated with the $P$ influence functions.
