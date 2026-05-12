@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE Xdmf SYSTEM "Xdmf.dtd" []>
+<Xdmf Version="3.0" xmlns:xi="https://www.w3.org/2001/XInclude">
+  <Domain>
+    <Grid Name="mesh" GridType="Uniform">
+      <Topology TopologyType="Hexahedron" NumberOfElements="936" NodesPerElement="8">
+        <DataItem Dimensions="936 8" NumberType="Int" Format="HDF">P_h_modes_rank0.h5:/Mesh/mesh/topology</DataItem>
+      </Topology>
+      <Geometry GeometryType="XYZ">
+        <DataItem Dimensions="1183 3" Format="HDF">P_h_modes_rank0.h5:/Mesh/mesh/geometry</DataItem>
+      </Geometry>
+    </Grid>
+  </Domain>
+</Xdmf>
